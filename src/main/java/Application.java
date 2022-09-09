@@ -143,11 +143,27 @@ public class Application implements IApplication {
 
     public void executeQuery13() {
         System.out.println("--- executeQuery13 ---");
+        var result = recordList
+            .stream()
+            .filter(data -> !(data.getWeekDay() == 1 || data.getWeekDay() == 5 || data.getWeekDay() == 6 || data.getWeekDay() == 7))
+            .filter(data -> Objects.equals(data.getTicketType(), "W") || Objects.equals(data.getTicketType(), "M"))
+            .filter(data -> data.getSource() == 5).filter(data -> data.getDestination() >= 5 && data.getDestination() <= 10)
+            .filter(data -> !data.isOffPeak())
+            .collect(Collectors.groupingBy(Record::getTicketType, Collectors.summingInt(Record::getNumberOfRegisteredChildren)));
+        System.out.println(result);
                 System.out.println();
     }
 
     public void executeQuery14() {
         System.out.println("--- executeQuery14 ---");
+        Map<String, Integer> result = recordList
+            .stream()
+            .filter(data -> data.getWeekDay() == 7)
+            .filter(data -> data.getSource() == 1 || data.getSource() == 5 || data.getSource() == 10 || data.getSource() == 15 || data.getSource() == 90 || data.getSource() == 95 || data.getSource() == 100)
+            .filter(data -> data.getDestination() == 1 || data.getDestination() == 5 || data.getDestination() == 10 || data.getDestination() == 15 || data.getDestination() == 20 || data.getDestination() == 25)
+            .collect(Collectors.groupingBy(Record::getTicketType, Collectors.collectingAndThen(Collectors.averagingInt(Record::getNumberOfRegisteredChildren), Double::intValue)));
+
+        System.out.println("result : " + result);
         System.out.println();
     }
 }
