@@ -136,13 +136,35 @@ public class Application implements IApplication {
         return result;
     }
 
-    public void executeQuery11() {
+public void executeQuery11() {
         System.out.println("--- executeQuery11 ---");
+        var result = recordList.stream()
+                .filter(data -> data.getSource() == 3)
+                .filter(data -> data.getDestination() == 1 || data.getDestination() == 3 || data.getDestination() == 5 )
+                .filter(data -> data.isOffPeak())
+                .collect(Collectors.groupingBy(Record::getWeekDay, Collectors.counting()));
+    
+        System.out.println(result);
+        System.out.println();
         System.out.println();
     }
 
     public void executeQuery12() {
         System.out.println("--- executeQuery12 ---");
+        var result = recordList.stream()
+
+                .filter(data -> !(data.getWeekDay() == 1 ||
+                        data.getWeekDay() == 5 ||
+                        data.getWeekDay() == 6 ||
+                        data.getWeekDay() == 7))
+                .filter(data -> Objects.equals(data.getTicketType(), "Y") )
+                .filter(data -> data.getSource() == 15)
+                .filter(data -> data.getDestination() >= 20 && data.getDestination() <= 25)
+                .filter(data -> data.isOffPeak())
+                .collect(Collectors.groupingBy(Record::getDestination, Collectors.counting()));
+
+        System.out.println(result);
+        System.out.println();
         System.out.println();
     }
 
