@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 
 public interface IApplication {
     List<Record> loadRecords();
@@ -11,7 +12,7 @@ public interface IApplication {
 
     void executeQuery04();
 
-    void executeQuery05();
+    long executeQuery05();
 
     void executeQuery06();
 
@@ -21,7 +22,7 @@ public interface IApplication {
 
     void executeQuery09();
 
-    void executeQuery10();
+    Map<String, Long> executeQuery10();
 
     void executeQuery11();
 

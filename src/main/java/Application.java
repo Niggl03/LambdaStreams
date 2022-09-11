@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.Map;
 
 public class Application implements IApplication {
     private final List<Record> recordList;
@@ -89,9 +90,11 @@ public class Application implements IApplication {
         System.out.println();
     }
 
-    public void executeQuery05() {
+    public long executeQuery05() {
         System.out.println("--- executeQuery05 ---");
-        System.out.println();
+        long result = recordList.stream().filter(data -> Objects.equals(data.getTicketType(), "Y")).filter(data -> data.getSource() == 1 || data.getSource() == 2 || data.getSource() == 3 || data.getSource() == 20 || data.getSource() == 30).filter(data -> data.getDestination() >= 5 && data.getDestination() <= 10).filter(data -> data.isOffPeak() == true).mapToInt(data -> data.getNumberOfRegisteredChildren()).sum();
+        System.out.println(result);
+        return result;
     }
 
     public void executeQuery06() {
@@ -126,9 +129,11 @@ public class Application implements IApplication {
         System.out.println();
     }
 
-    public void executeQuery10() {
+    public Map<String, Long> executeQuery10() {
         System.out.println("--- executeQuery10 ---");
-        System.out.println();
+        Map<String, Long> result = recordList.stream().filter(data -> data.getWeekDay() <= 5).filter(data -> data.getSource() >= 5 && data.getSource() <= 20).filter(data -> data.getDestination() >= 5 && data.getDestination() <= 20).collect(Collectors.groupingBy(Record::getTicketType, Collectors.counting()));
+        System.out.println(result);
+        return result;
     }
 
     public void executeQuery11() {
