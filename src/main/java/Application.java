@@ -70,7 +70,12 @@ public class Application implements IApplication {
 
     public void executeQuery02() {
         System.out.println("--- executeQuery02 ---");
-        System.out.println();
+        List<Record> result = recordList.stream()
+                .filter(data -> data.getWeekDay() <= 5)
+                .filter(data -> data.getSource() >= 50 && data.getSource() <= 75)
+                .filter(data -> data.getDestination() >=25 && data.getDestination() <= 30)
+                .collect(Collectors.toList());
+        System.out.println(result.size());
     }
 
     public short executeQuery03() {
@@ -87,8 +92,15 @@ public class Application implements IApplication {
 
     public void executeQuery04() {
         System.out.println("--- executeQuery04 ---");
-        System.out.println();
+        List<Record> result = recordList.stream()
+                .filter(data -> !Objects.equals(data.getTicketType(), "M") &&  !Objects.equals(data.getTicketType(), "Y"))
+                .filter(data -> data.getSource() >= 5 && data.getSource() <= 20 )
+                .filter(data -> data.getDestination() >= 5 && data.getDestination() <= 20)
+                .filter(data -> !data.isOffPeak())
+                .collect(Collectors.toList());
+        System.out.println("result:" + result.size() + " Entries");
     }
+
 
     public long executeQuery05() {
         System.out.println("--- executeQuery05 ---");
@@ -99,12 +111,49 @@ public class Application implements IApplication {
 
     public void executeQuery06() {
         System.out.println("--- executeQuery06 ---");
+        System.out.println("SELECT COUNT() FROM data");
+        var result = recordList.stream()
+                .filter(data -> Objects.equals(data.getTicketType(), "Y"))
+                .filter(data -> data.getSource() >=1 && data.getSource() <= 3 ||data.getSource() == 20 ||data.getSource() == 30)
+                .filter(data -> data.getDestination() != 5 && data.getDestination() != 10 && data.getDestination() != 15 && data.getDestination() != 20)
+                .filter(data -> data.isOffPeak() == false)
+                .collect(Collectors
+                        .averagingInt(
+                                data -> (data.getNumberOfRegisteredChildren())));
+
+        System.out.println("result : " + result.intValue());
         System.out.println();
     }
 
+
     public void executeQuery07() {
         System.out.println("--- executeQuery07 ---");
-        System.out.println();
+        List<Record> result = recordList.stream()
+                .filter(data -> data.getWeekDay() == 1 || data.getWeekDay() == 2)
+                .filter(data -> Objects.equals(data.getTicketType(), "S"))
+                .filter(data -> data.getSource() == 10)
+                .filter(data -> data.getDestination() <= 50)
+                .collect(Collectors.toList());
+        Comparator<Record> descendingDestinationComparator = (Record record01, Record record02) -> (int) (record02.getDestination() - record01.getDestination());
+        result.sort(descendingDestinationComparator);
+        result = result.stream().limit(3).collect(Collectors.toList());
+        result.forEach(str -> System.out.println("ID: " +str.getId()));
+
+        /*
+        Just for info:
+       My result differs from theirs from the log file:
+
+        My result:                                                        Your result:
+        ID: 310512                                                        ID: 310512
+        ID: 473082                                                        ID: 473082
+        ID: 659212                                                        ID: 944862
+
+        (Here are the two following results [4 and 5]: )
+        ID: 811094
+        ID: 944862
+
+        Your result in the 3 place is the result that comes to me in the 5 place.
+         */
     }
 
     public void executeQuery08() {
@@ -126,7 +175,9 @@ public class Application implements IApplication {
 
     public void executeQuery09() {
         System.out.println("--- executeQuery09 ---");
-        System.out.println();
+        var result1= recordList.stream()
+                .collect(Collectors.groupingBy(Record::isOffPeak, Collectors.counting()));
+        System.out.println(result1);
     }
 
     public Map<String, Long> executeQuery10() {

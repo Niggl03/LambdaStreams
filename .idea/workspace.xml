@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aac209da-be13-4a26-be02-6140388750e7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/03_metro_system.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/records.db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/data/records.db.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/records.db.script" beforeDir="false" afterPath="$PROJECT_DIR$/data/records.db.script" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/IApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,11 +35,12 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "/home/louis/Documents/GitHub/LambdaStreams"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.TestApplication">
+  <component name="RunManager" selected="Application.Application">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Application" />
       <module name="implementation.main" />
@@ -102,6 +100,7 @@
       <workItem from="1662470855229" duration="23000" />
       <workItem from="1662470897555" duration="13554000" />
       <workItem from="1662886428331" duration="3188000" />
+      <workItem from="1662922204854" duration="742000" />
     </task>
     <servers />
   </component>
